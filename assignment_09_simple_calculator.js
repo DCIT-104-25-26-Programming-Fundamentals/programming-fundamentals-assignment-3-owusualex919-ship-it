@@ -73,5 +73,113 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require('readline-sync');
 
+function addNumbers(a, b) {
+    return a + b;
+}
+
+function subtractNumbers(a, b) {
+    return a - b;
+}
+
+function multiplyNumbers(a, b) {
+    return a * b;
+}
+
+function divideNumbers(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a / b;
+}
+
+function modulusNumbers(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a % b;
+}
+
+function exponentNumbers(base, exponent) {
+    return base ** exponent;
+}
+
+function displayMenu() {
+    console.log("============================");
+    console.log("     SIMPLE CALCULATOR");
+    console.log("============================");
+    console.log("1. Addition");
+    console.log("2. Subtraction");
+    console.log("3. Multiplication");
+    console.log("4. Division");
+    console.log("5. Modulus");
+    console.log("6. Exponentiation");
+    console.log("7. Quit");
+}
+
+function main() {
+    let running = true;
+
+    while (running) {
+        displayMenu();
+        const choice = readlineSync.questionInt("Select an operation (1-7): ");
+
+        if (choice === 7) {
+            console.log("Goodbye!");
+            running = false;
+            continue;
+        }
+
+        if (choice < 1 || choice > 7) {
+            console.log("Error: Invalid choice. Please enter 1-7.");
+            console.log();
+            continue;
+        }
+
+        const firstNumber = readlineSync.questionFloat("Enter first number : ");
+        const secondNumber = readlineSync.questionFloat("Enter second number: ");
+
+        let result = null;
+        let symbol = " ";
+
+        switch (choice) {
+            case 1:
+                result = addNumbers(firstNumber, secondNumber);
+                symbol = "+";
+                break;
+            case 2:
+                result = subtractNumbers(firstNumber, secondNumber);
+                symbol = "-";
+                break;
+            case 3:
+                result = multiplyNumbers(firstNumber, secondNumber);
+                symbol = "*";
+                break;
+            case 4:
+                result = divideNumbers(firstNumber, secondNumber);
+                symbol = "/";
+                break;
+            case 5:
+                result = modulusNumbers(firstNumber, secondNumber);
+                symbol = "%";
+                break;
+            case 6:
+                result = exponentNumbers(firstNumber, secondNumber);
+                symbol = "**";
+                break;
+        }
+
+        if (result === null) {
+            console.log("Error: Cannot divide by zero.");
+        } else {
+            console.log(`Result: ${firstNumber} ${symbol} ${secondNumber} = ${result} = ${result.toFixed(2)}`);
+        }
+
+        imports:
+        console.log();
+    }
+}
+
+main();
 
