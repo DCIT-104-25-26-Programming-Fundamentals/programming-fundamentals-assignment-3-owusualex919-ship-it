@@ -43,3 +43,36 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+function isPrime(candidate) {
+    if (candidate < 2) {
+        return false;
+    }
+    if (candidate === 2 || candidate === 3) {
+        return true;
+    }
+    if (candidate % 2 === 0 || candidate % 3 === 0) {
+        return false;
+    }
+
+    for (let factor = 5; factor * factor <= candidate; factor += 6) {
+        if (candidate % factor === 0 || candidate % (factor + 2) === 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function main() {
+    const number = readlineSync.questionInt("Enter a number: ");
+
+    if (isPrime(number)) {
+        console.log(`${number} is a prime number.`);
+    } else {
+        console.log(`${number} is NOT a prime number.`);
+    }
+}
+
+main();
